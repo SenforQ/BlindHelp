@@ -51,6 +51,25 @@ post_install do |installer|
       end
     end
   end
+
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
+      config.build_settings['SWIFT_VERSION'] = '5.0'
+    end
+  end
+
+  # HandyJSON 优化设置 - 解决编译问题
+  installer.pods_project.targets.each do |target|
+    if target.name == 'HandyJSON'
+      target.build_configurations.each do |config|
+        # Apple Clang - Code Generation: Optimization Level 设置为 None [-O0]
+        config.build_settings['GCC_OPTIMIZATION_LEVEL'] = '0'
+        # Swift Compiler - Code Generation: Optimization Level 设置为 No Optimization [-Onone]
+        config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Onone'
+      end
+    end
+  end
   
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
@@ -60,4 +79,20 @@ post_install do |installer|
       File.open(xcconfig_path, "w") { |file| file << xcconfig_mod }
     end
   end
+
+  # Bitcode 处理
+  bitcode_strip_path = `xcrun --find bitcode_strip`.chop!
+  def strip_bitcode_from_framework(bitcode_strip_path, framework_relative_path)
+    framework_path = File.join(Dir.pwd, framework_relative_path)
+    command = "#{bitcode_strip_path} #{framework_path} -r -o #{framework_path}"
+    puts "Stripping bitcode: #{command}"
+    system(command)
+  end
+  framework_paths = [
+    "/Pods/TXIMSDK_Plus_iOS_Bitcode/ImSDK_Plus.framework/ImSDK_Plus",
+  ]
+  framework_paths.each do |framework_relative_path|
+    strip_bitcode_from_framework(bitcode_strip_path, framework_relative_path)
+  end
+
 end

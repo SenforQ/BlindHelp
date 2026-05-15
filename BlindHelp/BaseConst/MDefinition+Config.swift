@@ -56,10 +56,10 @@ let kClickProfileVipRouteCountEvents: String = "ProfileVipRouteCount"
 // MARK: - 协议与政策 URL
 
 /// 隐私政策地址（上线前请替换为正式 H5）。
-var kPrivatePolicyHtmlStr: String = "https://www.baidu.com"
+var kPrivatePolicyHtmlStr: String = "http://49.235.121.178/private.html"
 
 /// 用户协议地址（上线前请替换为正式 H5）。
-var kUserAgreementHtmlStr: String = "https://www.xiaohongshu.com/explore"
+var kUserAgreementHtmlStr: String = "http://49.235.121.178/usage.html"
 
 // MARK: - 网络与密钥
 

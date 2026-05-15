@@ -27,8 +27,6 @@
 		71044DDB2FB4513B0059CBF6 /* BHDiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71044DDA2FB4513B0059CBF6 /* BHDiscoverViewController.swift */; };
 		71044DDD2FB451510059CBF6 /* BHPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71044DDC2FB451460059CBF6 /* BHPhotoViewController.swift */; };
 		71044DDF2FB4515F0059CBF6 /* BHMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71044DDE2FB451570059CBF6 /* BHMessageViewController.swift */; };
-		71C44ABD2FB913020059CBF6 /* BHFigureChatHistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C44ABC2FB913010059CBF6 /* BHFigureChatHistoryStore.swift */; };
-		71D44EE02FB920010059CBF6 /* BHZhipuChatClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D44EDF2FB920000059CBF6 /* BHZhipuChatClient.swift */; };
 		71044DE12FB4516A0059CBF6 /* BHMineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71044DE02FB451620059CBF6 /* BHMineViewController.swift */; };
 		71044DE52FB453000059CBF6 /* BHBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71044DE42FB452F30059CBF6 /* BHBaseNavigationController.swift */; };
 		71044DE92FB480C60059CBF6 /* MDefinition+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71044DE82FB480BE0059CBF6 /* MDefinition+Font.swift */; };
@@ -94,6 +92,8 @@
 		71144ABA2FB813000059CBF6 /* BHFigureBlockShieldStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71144AB92FB813000059CBF6 /* BHFigureBlockShieldStore.swift */; };
 		71144ABC2FB813010059CBF6 /* BHFigureReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71144ABB2FB813010059CBF6 /* BHFigureReportViewController.swift */; };
 		71244FFA2FB814030059CBF6 /* BHMomentFeedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71244FF92FB814020059CBF6 /* BHMomentFeedCard.swift */; };
+		71C44ABD2FB913020059CBF6 /* BHFigureChatHistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C44ABC2FB913010059CBF6 /* BHFigureChatHistoryStore.swift */; };
+		71D44EE02FB920010059CBF6 /* BHZhipuChatClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D44EDF2FB920000059CBF6 /* BHZhipuChatClient.swift */; };
 		72644AAC2FB5E0010059CBF6 /* BHLocalMineAlbumStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72644AAB2FB5E0010059CBF6 /* BHLocalMineAlbumStore.swift */; };
 		72644AB02FB60100059CBF6 /* BHMineWorldDynamicStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72644AB12FB60100059CBF6 /* BHMineWorldDynamicStore.swift */; };
 		73044AB42FB603100059CBF6 /* home_travel_feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 73044AB52FB603100059CBF6 /* home_travel_feed.json */; };
@@ -123,8 +123,6 @@
 		71044DDA2FB4513B0059CBF6 /* BHDiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHDiscoverViewController.swift; sourceTree = "<group>"; };
 		71044DDC2FB451460059CBF6 /* BHPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHPhotoViewController.swift; sourceTree = "<group>"; };
 		71044DDE2FB451570059CBF6 /* BHMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHMessageViewController.swift; sourceTree = "<group>"; };
-		71C44ABC2FB913010059CBF6 /* BHFigureChatHistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHFigureChatHistoryStore.swift; sourceTree = "<group>"; };
-		71D44EDF2FB920000059CBF6 /* BHZhipuChatClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHZhipuChatClient.swift; sourceTree = "<group>"; };
 		71044DE02FB451620059CBF6 /* BHMineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHMineViewController.swift; sourceTree = "<group>"; };
 		71044DE42FB452F30059CBF6 /* BHBaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHBaseNavigationController.swift; sourceTree = "<group>"; };
 		71044DE82FB480BE0059CBF6 /* MDefinition+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDefinition+Font.swift"; sourceTree = "<group>"; };
@@ -191,6 +189,8 @@
 		71144ABB2FB813010059CBF6 /* BHFigureReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHFigureReportViewController.swift; sourceTree = "<group>"; };
 		71244FF92FB814020059CBF6 /* BHMomentFeedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHMomentFeedCard.swift; sourceTree = "<group>"; };
 		714E884C2FB31B3300491544 /* BlindHelp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlindHelp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		71C44ABC2FB913010059CBF6 /* BHFigureChatHistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHFigureChatHistoryStore.swift; sourceTree = "<group>"; };
+		71D44EDF2FB920000059CBF6 /* BHZhipuChatClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHZhipuChatClient.swift; sourceTree = "<group>"; };
 		72644AAB2FB5E0010059CBF6 /* BHLocalMineAlbumStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHLocalMineAlbumStore.swift; sourceTree = "<group>"; };
 		72644AB12FB60100059CBF6 /* BHMineWorldDynamicStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHMineWorldDynamicStore.swift; sourceTree = "<group>"; };
 		73044AB52FB603100059CBF6 /* home_travel_feed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = home_travel_feed.json; sourceTree = "<group>"; };
@@ -758,11 +758,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PV9C8NJR45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlindHelp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "觅兔游";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "用于从我的相册中添加照片和视频";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -773,9 +777,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.BlindHelp.Blind.BlindHelp;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Blind.BlindHelp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = dis_BlindHelpPV9C8NJR45;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -796,11 +802,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PV9C8NJR45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlindHelp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "觅兔游";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "用于从我的相册中添加照片和视频";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -811,9 +821,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.BlindHelp.Blind.BlindHelp;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Blind.BlindHelp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = dis_BlindHelpPV9C8NJR45;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
