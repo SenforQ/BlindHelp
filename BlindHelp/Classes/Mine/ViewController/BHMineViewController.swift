@@ -46,7 +46,7 @@ final class BHMineViewController: BHBaseViewController {
     private lazy var leftNavTitleLab: UILabel = {
         let lab = UILabel(
             frame: CGRect(
-                x: MineLayout.hInset,
+                x: kScaleW(14),
                 y: kStatusBarHeight + kScaleW(10),
                 width: kScaleW(100),
                 height: kScaleW(25)
@@ -195,8 +195,9 @@ final class BHMineViewController: BHBaseViewController {
 
     private lazy var bottomTabBar: BHCustomBottomTabBarView = {
         let bar = BHCustomBottomTabBarView(host: self, selectedMainTab: .mine)
-        bar.onPhotoButtonTapped = {
-            print("点击拍照")
+        bar.onPhotoButtonTapped = { [weak self] in
+            guard let nav = self?.navigationController else { return }
+            nav.pushViewController(BHDiscoverPostPhotoViewController(), animated: true)
         }
         return bar
     }()
@@ -214,6 +215,7 @@ final class BHMineViewController: BHBaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        bottomTabBar.syncHighlightedSelectionWithHostingTabBar()
         syncMineProfileFromStore()
     }
 

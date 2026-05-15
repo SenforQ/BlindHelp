@@ -66,6 +66,9 @@ var kUserAgreementHtmlStr: String = "https://www.xiaohongshu.com/explore"
 /// 第三方 / Banana 相关 API Key（勿提交到公开仓库时建议改为远端下发或 xcconfig）。
 let kBananakey: String = "c85203f01ad447f101bb5d9ab1c4917b"
 
+/// 智谱开放平台（GLM｜Chat Completions）密钥；公开仓库勿提交真实 Key，建议使用 xcconfig / 远端下发并轮换密钥。
+let kZhipuAPIKey: String = "6d7dd50e84874f0ba119ececc8291332.lBVvYltsiM8rXbEz"
+
 /// 创建任务（无图）接口。
 let postBananaCreateTaskNoImageUrlStr: String = "https://api.kie.ai/api/v1/jobs/createTask"
 

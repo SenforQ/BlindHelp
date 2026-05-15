@@ -8,12 +8,20 @@ import UIKit
 
 final class BHDiscoverPostPhotoViewController: BHBaseViewController, UITextViewDelegate, PHPickerViewControllerDelegate {
 
+    private enum ConsentLink {
+        static let userTerms = URL(string: "bhpost://terms")!
+        static let privacy = URL(string: "bhpost://privacy")!
+    }
+
     private let sheetView = UIView()
     private let placeholderLabel = UILabel()
     private let contentTextView = UITextView()
 
     private let submitNavButton = UIButton(type: .custom)
     private let addPhotoButton = UIButton(type: .custom)
+
+    private let consentCheckboxButton = UIButton(type: .custom)
+    private let consentTextView = UITextView()
 
     private var pickedPhotos: [UIImage] = []
     private var pickerRemainingSlotsWhenPresented = 3
@@ -112,6 +120,38 @@ final class BHDiscoverPostPhotoViewController: BHBaseViewController, UITextViewD
         addPhotoButton.addTarget(self, action: #selector(addPhotoTapped), for: .touchUpInside)
         sheetView.addSubview(addPhotoButton)
 
+        let linkColor = UIColor.kHexColor(hexString: "#2B6CF5")
+        consentTextView.isEditable = false
+        consentTextView.isScrollEnabled = false
+        consentTextView.backgroundColor = .clear
+        consentTextView.textContainerInset = .zero
+        consentTextView.textContainer.lineFragmentPadding = 0
+        consentTextView.textContainer.lineBreakMode = .byWordWrapping
+        consentTextView.contentInset = .zero
+        if #available(iOS 11.0, *) {
+            consentTextView.contentInsetAdjustmentBehavior = .never
+        }
+        consentTextView.delaysContentTouches = false
+        consentTextView.delegate = self
+        consentTextView.linkTextAttributes = [
+            .foregroundColor: linkColor,
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+        ]
+        consentTextView.attributedText = Self.makeConsentAttributedString(linkColor: linkColor)
+
+        consentCheckboxButton.adjustsImageWhenHighlighted = false
+        if let circle = UIImage(systemName: "circle")?.withTintColor(.kHexColor(hexString: "#999999"), renderingMode: .alwaysOriginal),
+           let checked = UIImage(systemName: "checkmark.circle.fill")?.withTintColor(.kHexColor(hexString: "#A5F500"), renderingMode: .alwaysOriginal) {
+            consentCheckboxButton.setImage(circle, for: .normal)
+            consentCheckboxButton.setImage(checked, for: .selected)
+        }
+        consentCheckboxButton.addTarget(self, action: #selector(consentCheckboxTapped), for: .touchUpInside)
+
+        submitNavButton.setTitleColor(.kHexColor(hexString: "#999999"), for: .disabled)
+
+        sheetView.addSubview(consentCheckboxButton)
+        sheetView.addSubview(consentTextView)
+
         for (idx, cell) in thumbnailCells.enumerated() {
             cell.deleteOverlayBtn.tag = idx
             cell.deleteOverlayBtn.addTarget(self, action: #selector(thumbnailDeleteTapped(_:)), for: .touchUpInside)
@@ -123,6 +163,33 @@ final class BHDiscoverPostPhotoViewController: BHBaseViewController, UITextViewD
         sheetView.addSubview(contentTextView)
         reloadPhotoStripLayoutState()
         syncPlaceholderVisibility()
+        syncSubmitButtonEnabledForConsent()
+    }
+
+    private static func makeConsentAttributedString(linkColor: UIColor) -> NSAttributedString {
+        let bodyFont = UIFont.bh_pingFang(size: 12, weight: .regular)
+        let gray = UIColor.kHexColor(hexString: "#666666")
+        let base: [NSAttributedString.Key: Any] = [.font: bodyFont, .foregroundColor: gray]
+
+        let full = NSMutableAttributedString(string: "已阅读并同意", attributes: base)
+
+        let termsAttrs: [NSAttributedString.Key: Any] = [
+            .font: bodyFont,
+            .foregroundColor: linkColor,
+            .link: ConsentLink.userTerms,
+        ]
+        full.append(NSAttributedString(string: "《用户协议》", attributes: termsAttrs))
+
+        full.append(NSAttributedString(string: "和", attributes: base))
+
+        let privacyAttrs: [NSAttributedString.Key: Any] = [
+            .font: bodyFont,
+            .foregroundColor: linkColor,
+            .link: ConsentLink.privacy,
+        ]
+        full.append(NSAttributedString(string: "《隐私政策》", attributes: privacyAttrs))
+
+        return full
     }
 
     override func setupBodyView() {
@@ -186,6 +253,33 @@ final class BHDiscoverPostPhotoViewController: BHBaseViewController, UITextViewD
         )
         submitNavButton.layer.cornerRadius = submitH / 2
         navContainer.bringSubviewToFront(submitNavButton)
+
+        let consentGapTop = kScaleW(12)
+        let consentRowTop = rowY + side + consentGapTop
+        let chk = kScaleW(22)
+        let tvX = hInset + chk + kScaleW(8)
+        let tvW = max(0, W - tvX - hInset)
+
+        consentTextView.frame = CGRect(x: tvX, y: consentRowTop, width: tvW, height: 1)
+        let fitH = consentTextView.sizeThatFits(CGSize(width: tvW, height: CGFloat.greatestFiniteMagnitude)).height
+        let consentFont = UIFont.bh_pingFang(size: 12, weight: .regular)
+        let tvH = max(ceil(consentFont.lineHeight), ceil(fitH))
+
+        let rowH = max(chk, tvH)
+        let rowYAligned = consentRowTop
+        consentTextView.frame = CGRect(x: tvX, y: rowYAligned + (rowH - tvH) / 2, width: tvW, height: tvH)
+        consentCheckboxButton.frame = CGRect(x: hInset, y: rowYAligned + (rowH - chk) / 2, width: chk, height: chk)
+    }
+
+    @objc private func consentCheckboxTapped() {
+        consentCheckboxButton.isSelected.toggle()
+        syncSubmitButtonEnabledForConsent()
+    }
+
+    private func syncSubmitButtonEnabledForConsent() {
+        let ok = consentCheckboxButton.isSelected
+        submitNavButton.isEnabled = ok
+        submitNavButton.alpha = ok ? 1 : 0.55
     }
 
     @objc private func addPhotoTapped() {
@@ -259,6 +353,11 @@ final class BHDiscoverPostPhotoViewController: BHBaseViewController, UITextViewD
     }
 
     @objc private func submitTapped() {
+        guard consentCheckboxButton.isSelected else {
+            view.cd_showDefaultToast("请先阅读并勾选同意用户协议与隐私政策")
+            return
+        }
+
         let t = contentTextView.text ?? ""
         let trimmed = t.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty || !pickedPhotos.isEmpty else {
@@ -279,7 +378,7 @@ final class BHDiscoverPostPhotoViewController: BHBaseViewController, UITextViewD
             _ = BHMineWorldDynamicStore.shared.append(text: snapsText, images: snaps)
             self.view.cd_hidToast()
             self.contentTextView.isEditable = true
-            self.submitNavButton.isEnabled = true
+            self.syncSubmitButtonEnabledForConsent()
             self.view.isUserInteractionEnabled = true
             self.navigationController?.popViewController(animated: true)
         }
@@ -291,6 +390,20 @@ final class BHDiscoverPostPhotoViewController: BHBaseViewController, UITextViewD
     }
 
     func textViewDidChange(_ textView: UITextView) {
+        guard textView === contentTextView else { return }
         syncPlaceholderVisibility()
+    }
+
+    func textView(_ textView: UITextView, shouldInteractWith url: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        guard textView === consentTextView else { return true }
+        if url == ConsentLink.userTerms {
+            navigationController?.pushViewController(BHMineUserTermsViewController(), animated: true)
+            return false
+        }
+        if url == ConsentLink.privacy {
+            navigationController?.pushViewController(BHMinePrivateViewController(), animated: true)
+            return false
+        }
+        return false
     }
 }

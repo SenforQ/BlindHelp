@@ -175,6 +175,15 @@ final class BHCustomBottomTabBarView: UIView {
         }
     }
 
+    /// 与宿主 `UITabBarController.selectedIndex` 对齐（索引 0～3 对应四个主 Tab）。
+    func syncHighlightedSelectionWithHostingTabBar() {
+        guard let tabBarController = hostViewController?.tabBarController,
+              let tab = MainTab(rawValue: tabBarController.selectedIndex),
+              tab != selectedMainTab else { return }
+        selectedMainTab = tab
+        reflectSelection()
+    }
+
     private func handleTab(_ tab: MainTab) {
         guard let host = hostViewController,
               let tabBar = host.tabBarController else { return }
